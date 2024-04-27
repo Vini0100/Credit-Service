@@ -1,0 +1,26 @@
+spring:
+  main:
+    web-application-type: REACTIVE
+  application:
+    name: mscloudgateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true #Quando ativada, o Spring Cloud Gateway irá consultar o serviço de descoberta para descobrir os serviços disponíveis e rotear as requisições
+          lower-case-service-id: true #  Os IDs dos serviços registrados serão convertidos para minúsculas antes de serem usados para roteamento
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8081/realms/mscourserealm
+
+server: #Tanto o Eureka quanto o Gateway tem portas fixas, não sendo necessário subir várias instacias destes
+  port: 8080
+
+eureka:
+  client:
+    fetch-registry: true # Define se este servidor Eureka deve buscar registros de outros servidores Eureka. No caso como este é o Gateway, irá buscar registros no Discovery Server(Eureka)
+    register-with-eureka: true # Define se este servidor Eureka deve se registrar em outro servidor Eureka. No caso como este é o Gateway, será o servidor secundário buscando a classe Gateway ja criada
+    service-url:
+      defaultZone: http://cursos-eureka-user:123@localhost:8761/eureka #URL do servidor Eureka

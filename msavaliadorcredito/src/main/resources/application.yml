@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: msavaliadorcredito
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+server:
+  port: 0 # O padrão é 8080, mas vou definir como 0 para que as instâncias determinem suas próprias portas.
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://cursos-eureka-user:123@localhost:8761/eureka #URL do servidor Eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}} # Referenciando a primeira propriedade e passando um numero aleatório. Isto ajuda na nomenclatura da instancia.
+
+mq:
+  queues:
+    emissao-cartoes: emissao-cartoes

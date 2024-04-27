@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: msclientes
+
+server:
+  port: 0 # O padrão é 8080, mas vou definir como 0 para que as instâncias determinem suas próprias portas.
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://cursos-eureka-user:123@${EUREKA_SERVER}:8761/eureka #URL do servidor Eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}} # Referenciando a primeira propriedade e passando um numero aleatório. Isto ajuda na nomenclatura da instancia.
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

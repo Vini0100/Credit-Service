@@ -1,0 +1,17 @@
+spring:
+  aplication:
+    name: eurekaserver #Muito importante para ser encontrado pelo Gateway
+  security:
+    basic:
+      enabled: true #Habilita a segurança básica
+    user:
+      name: cursos-eureka-user
+      password: 123
+
+server:
+  port: 8761 #Porta padrão do Eurekaserver
+
+eureka:
+  client:
+    register-with-eureka: false # Define se este servidor Eureka deve buscar registros de outros servidores Eureka. No caso não, vai ser local e haverá apenas um Eureka
+    fetch-registry: false # Define se este servidor Eureka deve se registrar em outro servidor Eureka. No caso não, será apenas este.
